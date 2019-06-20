@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-type User struct {
+type User1 struct {
 	UserName string `json:"username"`
 	NickName string `json:"nickname"`
 	Age      int
@@ -21,7 +21,7 @@ type User struct {
 /*结构体转json*/
 
 func testStruct1() {
-	user1 := &User{
+	user1 := &User1{
 		UserName: "user1",
 		NickName: "Murphy",
 		Age:      18,

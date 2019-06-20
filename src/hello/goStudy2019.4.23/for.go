@@ -33,6 +33,7 @@ func for2() int {
 
 //无限循环
 func for3() {
+
 	//报错
 	/*for {
 	}*/

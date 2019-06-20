@@ -32,7 +32,7 @@ func test(b interface{}) {
 }
 
 func main() {
-	var a Student = Student{
+	var a = Student{
 		Name:  "stu01",
 		Age:   18,
 		Score: 92,

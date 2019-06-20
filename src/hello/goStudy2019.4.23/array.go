@@ -7,7 +7,7 @@ import "fmt"
 */
 func main() {
 
-	var a [2]string
+	var a [2]string //长度为2的字符串数组
 	a[0] = "jayce"
 	a[1] = "lucifer"
 	fmt.Println(a[0], a[1])

@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	var b int = 1
+	var b = 1
 	b = 200
 	testInt(&b)
 	fmt.Println(b)

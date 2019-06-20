@@ -43,7 +43,7 @@ func gob1() {
 }
 func gob2() {
 	pa := &Address{"private", "Aartselaar", "Belgium"}
-	wa := &Address{"work", "Boom", "Belgium"}
+	wa := &Address{"second", "Boom", "Belgium"}
 	vc := VCard{"Jan", "Kersschot", []*Address{pa, wa}, "none"}
 	// fmt.Printf("%v: \n", vc) // {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
 	// using an encoder:

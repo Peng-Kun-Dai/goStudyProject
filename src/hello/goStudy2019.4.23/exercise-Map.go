@@ -12,9 +12,8 @@ func WordCount(s string) map[string]int {
 	var slice []string = strings.Fields(s)
 
 	for i := 0; i < len(slice); i++ {
-		v, ok := m[slice[i]]
+		_, ok := m[slice[i]]
 		if ok {
-			v++ //没有意义 ，v不使用会报错
 			m[slice[i]]++
 		} else {
 			m[slice[i]] = 1
@@ -25,5 +24,6 @@ func WordCount(s string) map[string]int {
 }
 
 func main() {
+	fmt.Println(WordCount("i love you ,and you"))
 	fmt.Printf("Fields are: %q", strings.Fields("  foo bar  baz   "))
 }

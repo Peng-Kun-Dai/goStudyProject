@@ -32,7 +32,7 @@ func main() {
 func marshal() {
 	//序列化
 	pa := &Address{"private", "Aartselaar", "Belgium"}
-	wa := &Address{"work", "Boom", "Belgium"}
+	wa := &Address{"second", "Boom", "Belgium"}
 	vc := VCard{"Jan", "Kersschot", []*Address{pa, wa}, "none"}
 	// fmt.Printf("%v: \n", vc) // {Jan Kersschot [0x126d2b80 0x126d2be0] none}:
 	// JSON format:

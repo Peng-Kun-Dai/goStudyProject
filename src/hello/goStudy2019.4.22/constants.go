@@ -14,7 +14,7 @@ const Pi = 3.14
 
 func main() {
 	const World = "世界"
-	//World = "nihao"
+	//World = "nihao"   no change
 	fmt.Println("hello", World)
 
 	fmt.Println("myself", Pi)
