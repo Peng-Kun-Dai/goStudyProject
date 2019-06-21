@@ -1,0 +1,13 @@
+[
+  {
+    "age": 18,
+    "sex": "man",
+    "username": "user1"
+  },
+  {
+    "age": 29,
+    "height": "180cm",
+    "sex": "female",
+    "username": "user2"
+  }
+]

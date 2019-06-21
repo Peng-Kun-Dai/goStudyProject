@@ -1,0 +1,8 @@
+[Debug]09:52:04 this is a Debug log
+[Debug]09:52:40 this is a Debug log
+[Debug]debugLog.go:26: this is a Debug log
+[Debug]10:19:18 this is a Debug log
+[Debug]10:19:18 <nil>
+[Debug]10:22:01 this is a Debug log
+[Debug]10:23:52 this is a Debug log
+[Debug]10:23:52 pkg: An error occurred
