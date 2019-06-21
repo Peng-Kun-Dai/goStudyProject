@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34aa2527-13b6-4772-956a-c6cc9d156507" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hello/test/test9.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-20/cat2.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-20/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-20/json.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-20/select.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-20/sync.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/iota.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/type.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test1.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test1.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test2.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test2.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test3.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test3.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test4.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test4.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test5.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test5.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test6.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test6.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test7.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test7.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hello/test/test8.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/hello/test/test8.go" afterDir="false" />
-    </list>
+    <list default="true" id="34aa2527-13b6-4772-956a-c6cc9d156507" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/hello/goStudy2019.5.6/filetmp.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="984">
+            <state relative-caret-position="480">
               <caret line="46" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
             </state>
           </provider>
@@ -82,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/second/gostudy2019-6-21/type.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="336">
+              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -324,21 +305,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12153518" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49910393" visible="true" weight="0.20535715" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49910393" weight="0.24330357" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39908257" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32873562" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32924107" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.35379463" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50089604" side_tool="true" weight="0.2091954" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32924107" />
@@ -597,13 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hello/goStudy2019.5.6/filetmp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="984">
-          <caret line="46" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/second/gostudy2019-6-20/sync.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -628,6 +601,13 @@
     <entry file="file://C:/go/src/bufio/bufio.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/hello/goStudy2019.5.6/filetmp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="46" column="16" selection-start-line="45" selection-start-column="4" selection-end-line="50" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/second/gostudy2019-6-21/iota.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -637,8 +617,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/second/gostudy2019-6-21/type.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="336">
+          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
         </state>
       </provider>
     </entry>
