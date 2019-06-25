@@ -183,9 +183,7 @@ func (g *Generator) format() []byte {
 	src, err := format.Source(g.buf.Bytes())
 	if err != nil {
 		// Should never happen, but can arise when developing this code.
-		//永远不应该发生，但在开发此代码时可能会出现。
 		// The user can compile the output to see the error.
-		//用户可以编译输出以查看错误。
 		log.Printf("warning: internal error: invalid Go generated: %s", err)
 		log.Printf("warning: compile the package to analyze the error")
 		return g.buf.Bytes()
