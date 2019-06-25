@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34aa2527-13b6-4772-956a-c6cc9d156507" name="Default Changelist" comment="frist">
-      <change afterPath="$PROJECT_DIR$/src/leetcode/leet.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/go.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/math.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/niuke.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/panic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/panic2.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/rune.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/second/gostudy2019-6-21/writGroup.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/main_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/string/pill.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/string/stringer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/string/testpill.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/structToMap.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/test/struct.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/test/test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/work1/testdata.go" afterDir="false" />
+    <list default="true" id="34aa2527-13b6-4772-956a-c6cc9d156507" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/work1/structToMap.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/work1/structToMap.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,15 +28,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/leetcode/leet.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/work1/test/main_test.go">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -63,11 +39,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/work1/structToMap.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="364" column="28" selection-start-line="364" selection-start-column="28" selection-end-line="364" selection-end-column="28" />
+            <state relative-caret-position="290">
+              <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+              <folding>
+                <element signature="e#173#788#0" />
+                <element signature="e#1533#1697#0" />
+                <element signature="e#1712#1819#0" />
+                <element signature="e#1908#2231#0" />
+                <element signature="n#!!block;n#Printf#0" />
+                <element signature="n#!!block;n#isDirectory#0" />
+                <element signature="n#!!block;n#parsePackage#0" />
+                <element signature="n#!!block;n#addPackage#0" />
+                <element signature="n#!!block;n#generate#0" />
+                <element signature="e#5112#5172#0" />
+                <element signature="n#!!block;n#buildOneRun#0" />
+                <element signature="e#5657#5755#1" />
+                <element signature="e#5777#5804#1" />
+                <element signature="e#5826#5844#1" />
+                <element signature="n#!!block;n#format#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,13 +68,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/work1/testdata.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+            <state relative-caret-position="108">
+              <caret line="4" column="9" selection-start-line="3" selection-end-line="7" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/work1/string/pill.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -143,9 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/work/gostudy2019-6-18/fibonacci.go" />
-        <option value="$PROJECT_DIR$/src/work/gostudy2019-6-19/array.go" />
-        <option value="$PROJECT_DIR$/src/work/gostudy2019-6-19/slice.go" />
         <option value="$PROJECT_DIR$/src/work/gostudy2019-6-19/string.go" />
         <option value="$PROJECT_DIR$/src/work/gostudy2019-6-19/map.go" />
         <option value="$PROJECT_DIR$/src/work/gostudy2019-6-19/struct_tag.go" />
@@ -194,12 +184,14 @@
         <option value="$PROJECT_DIR$/src/leet.go" />
         <option value="$PROJECT_DIR$/src/leetcode/leet.go" />
         <option value="$PROJECT_DIR$/src/test/main_test.go" />
+        <option value="$PROJECT_DIR$/src/work1/string/pill.go" />
+        <option value="$PROJECT_DIR$/src/work1/userToMap.go" />
+        <option value="$PROJECT_DIR$/src/work1/structToMap.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="903" />
-    <option name="y" value="3" />
+    <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -382,12 +374,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13059701" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919955" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49910393" visible="true" weight="0.22886133" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49910393" weight="0.22886133" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39908257" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -395,13 +387,13 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.33258173" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.35379463" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50089604" side_tool="true" weight="0.2091954" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32924107" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50089604" side_tool="true" weight="0.2091954" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32924107" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Terminal" order="4" side_tool="true" weight="0.54923415" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24945295" />
@@ -431,7 +423,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="frist" />
-    <option name="LAST_COMMIT_MESSAGE" value="frist" />
+    <MESSAGE value="struct Metod" />
+    <option name="LAST_COMMIT_MESSAGE" value="struct Metod" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/hello/goStudy2019.4.27/constructor.go">
@@ -637,27 +630,48 @@
     <entry file="file://$PROJECT_DIR$/src/second/gostudy2019-6-18/review.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/work1/structToMap.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="364" column="28" selection-start-line="364" selection-start-column="28" selection-end-line="364" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/work1/usertomap.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/work1/testdata.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/work1/string/pill.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/work1/userToMap.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/work1/testdata.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="9" selection-start-line="3" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/work1/structToMap.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+          <folding>
+            <element signature="e#173#788#0" />
+            <element signature="e#1533#1697#0" />
+            <element signature="e#1712#1819#0" />
+            <element signature="e#1908#2231#0" />
+            <element signature="n#!!block;n#Printf#0" />
+            <element signature="n#!!block;n#isDirectory#0" />
+            <element signature="n#!!block;n#parsePackage#0" />
+            <element signature="n#!!block;n#addPackage#0" />
+            <element signature="n#!!block;n#generate#0" />
+            <element signature="e#5112#5172#0" />
+            <element signature="n#!!block;n#buildOneRun#0" />
+            <element signature="e#5657#5755#1" />
+            <element signature="e#5777#5804#1" />
+            <element signature="e#5826#5844#1" />
+            <element signature="n#!!block;n#format#0" />
+          </folding>
         </state>
       </provider>
     </entry>
