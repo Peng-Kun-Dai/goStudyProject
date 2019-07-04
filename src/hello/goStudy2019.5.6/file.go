@@ -21,7 +21,7 @@ func createfile() {
 	//创建文件
 	//Create会返回一个文件对象，默认权限0666
 	//如果源文件存在将被覆盖
-	file1, err1 := os.Create("./filetmp/file1.log")
+	file1, err1 := os.Create("./filetmp/file1.tmpl")
 	if err1 != nil {
 		//log.Println(err1)
 		log.Fatalln(err1)
@@ -29,7 +29,7 @@ func createfile() {
 	defer file1.Close()
 }
 func readfile() {
-	inputfile, err1 := os.Open("./filetmp/file1.log")
+	inputfile, err1 := os.Open("./filetmp/file1.tmpl")
 	if err1 != nil {
 		log.Fatalln(err1)
 	}
@@ -50,7 +50,7 @@ func readfile() {
 }
 func readAllAndWrite() {
 	//将整个文件的内容读到一个字符串里：
-	inputFile := "./filetmp/file1.log"
+	inputFile := "./filetmp/file1.tmpl"
 	outputFile := "./filetmp/file1_copy.log"
 	buf, err := ioutil.ReadFile(inputFile)
 	if err != nil {

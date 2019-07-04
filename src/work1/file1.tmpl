@@ -1,0 +1,8 @@
+{{/* a comment */}}
+//this is a method that {{.StructName}} converts to map
+func (i {{.StructName}}) {{.StructName}}ToMap() map[string]interface{} {
+	var data = make(map[string]interface{})
+	{{range .FieldsNames}}data["{{.}}"] = i.{{.}}
+	{{end}}
+	return data
+}

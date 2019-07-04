@@ -1,30 +1,31 @@
 package main
 
 //常规
-//go:generate structToMap -type=User
+//go:generate structToMapTool -type=User,date,test
 type User struct {
 	name string
 	age  int
 }
 
 //匿名
-//go:generate structToMap -type=date
 type date struct {
 	name1, name2 string
 	string
 }
 
 //嵌套
-//go:generate structToMap -type=test
 type test struct {
 	user1 *User
 	user2 User
 	date
 }
 
+//空结构体
+type empty struct {
+}
+
 //组合
-//go:generate structToMap -type=man
-//go:generate structToMap -type=woman
+//go:generate structToMapTool -type=man,woman
 type (
 	man struct {
 		name string

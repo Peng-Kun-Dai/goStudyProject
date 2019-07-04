@@ -6,7 +6,10 @@ import (
 	"go/parser"
 	"go/scanner"
 	"go/token"
+	"log"
+	"os"
 	"testing"
+	"text/template"
 )
 
 func TestScanner(t *testing.T) {
@@ -100,4 +103,32 @@ func TestInspectAST(t *testing.T) {
 		return true*/
 	})
 	fmt.Println(structdata)
+}
+
+const functemplate = `
+
+func (i {{.structName}}) {{.structName}}ToMap() map[string]interface{} {
+    var data = make(map[string]interface{})
+    {{range .fieldsNames.Field}}
+    data["{{.Name}}"] = i.{{.Name}}
+    return data
+}
+`
+
+type gen struct {
+	structName  string
+	fieldsNames []string
+}
+
+func testTem() {
+	g := gen{
+		structName:  "jayce",
+		fieldsNames: []string{"User", "age"},
+	}
+	t := template.Must(template.New("letter").Parse(functemplate))
+	err := t.Execute(os.Stdout, g)
+	if err != nil {
+		log.Println("executing template:", err)
+	}
+
 }
