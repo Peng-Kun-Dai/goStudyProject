@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 //两数之和
 //range
@@ -18,17 +21,13 @@ func twoSum(nums []int, target int) []int {
 	return tar
 }
 
-//+  ->   -
-//o(n)
+//
 func twoSum2(nums []int, target int) []int {
-	len := len(nums)
-	for i := 0; i < len-1; i++ {
+	sort.Ints(nums)
 
-	}
-	tar := []int{}
-	return tar
 }
 func main() {
+
 	nums := []int{2, 7, 11, 15}
 	target := 10
 	tar := twoSum(nums, target)

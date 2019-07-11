@@ -1,0 +1,12 @@
+// Scry Info.  All rights reserved.
+// license that can be found in the license file.
+package main
+import (
+    {{range $index, $element := .}}{{$element.Alias}} "{{$element.ImportDir}}"
+    {{end}}
+)
+func main() {
+	{{range $index, $element := .}}
+	{{range $index, $func := $element.FuncNames}}{{$element.Alias}}.{{$func}}()
+	{{end}}{{end}}
+}
