@@ -1,8 +1,12 @@
-{{/* a comment */}}
-//this is a method that {{.StructName}} converts to map
-func (i {{.StructName}}) {{.StructName}}ToMap() map[string]interface{} {
+ /*import (
+       {{range $index, $element := .}}"{{$element.PkgPath}}"
+        {{end}})*/
+{{range $index, $element := .}}
+{{range $index, $result := $element.Structs}}
+//this is a method that {{$result.StructName}} converts to map
+func (i {{$result.StructName}}) {{$result.StructName}}ToMap() map[string]interface{} {
 	var data = make(map[string]interface{})
-	{{range .FieldsNames}}data["{{.}}"] = i.{{.}}
+	{{range $index, $element :=$result.FieldNames}}data["{{$element}}"] = i.{{$element}}
 	{{end}}
 	return data
-}
+}{{end}}{{end}}

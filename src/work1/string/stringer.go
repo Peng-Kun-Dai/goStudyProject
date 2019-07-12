@@ -56,7 +56,7 @@
 // where t is the lower-cased name of the first type listed. It can be overridden
 // with the -output flag.
 //
-package main // import "golang.org/x/tools/cmd/stringer"
+package string
 
 import (
 	"bytes"
@@ -215,7 +215,7 @@ type Generator struct {
 
 //print
 func (g *Generator) Printf(format string, args ...interface{}) {
-	fmt.Fprintf(&g.buf, format, args...)
+	_, _ = fmt.Fprintf(&g.buf, format, args...)
 }
 
 // File holds a single parsed file and associated data.
