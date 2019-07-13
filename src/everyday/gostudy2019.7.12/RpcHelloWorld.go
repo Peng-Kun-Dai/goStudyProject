@@ -17,7 +17,7 @@ type HelloService struct {
 // 并返回一个error
 // 必须是公开的方法
 func (p *HelloService) Hello(Request string, reply *string) error {
-	*reply = "RPChello:" + Request
+	*reply = "hello" + Request
 	return nil
 }
 

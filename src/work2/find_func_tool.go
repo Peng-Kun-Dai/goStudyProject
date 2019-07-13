@@ -5,10 +5,12 @@ import (
 	"flag"
 	"fmt"
 	"go/ast"
+	"go/token"
 	"golang.org/x/tools/go/packages"
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strconv"
@@ -25,17 +27,19 @@ var path = flag.String("path", "", "find Absolute path,must be set")
 var mod = flag.Bool("mod", true, "Traverse mod, default true")
 
 type packageInfo struct {
-	absDir string //该目录\包的绝对路径
-
+	absDir      string //该目录\包的绝对路径
 	packageName string //正在扫描的包名，需要绝对路径
 	astFiles    []*ast.File
 	ImportDir   string //导入路径
-
-	FuncNames []string //满足条件的函数名
-	isExist   bool     //是否存在满足条件的函数
-
-	Alias string //别名
-
+	//FuncNames []string //满足条件的函数名
+	Funcs   []*FuncOfDot
+	isExist bool   //是否存在满足条件的函数
+	Alias   string //别名
+}
+type FuncOfDot struct {
+	FuncName string    //函数名
+	IsSlice  bool      //返回值是否是数组
+	location token.Pos //函数位置
 }
 
 func main() {
@@ -102,57 +106,6 @@ func main() {
 	// 对于每个子目录通过package.config获取包名，以及当前位置的所有ast.file
 	var allInfo []*packageInfo
 	{
-		/*var wg sync.WaitGroup
-		//构建[]*packageInfo
-		wg.Add(len(allDirs))
-		for ix := range allDirs {
-
-			go func() {
-				defer wg.Done()
-				p := packageInfo{
-					absDir: allDirs[ix],
-				}
-				p.parsePackage()
-				allInfo = append(allInfo, &p)
-			}()
-		}
-		wg.Wait()*/
-		/*done := make(chan bool)
-		for ix := range allDirs {
-			go func() {
-				p := packageInfo{
-					absDir: allDirs[ix],
-				}
-				p.parsePackage()
-				allInfo = append(allInfo, &p)
-				done <- true
-			}()
-		}
-		for i := 0; i < len(allDirs); i++ {
-			<-done
-		}*/
-		/*	for ix := range allDirs {
-			p := packageInfo{
-				absDir: allDirs[ix],
-			}
-			p.parsePackage()
-			allInfo = append(allInfo, &p)
-		}*/
-
-		//构建[]*packageInfo
-		/*var wg sync.WaitGroup
-		wg.Add(len(allDirs))
-		for ix := range allDirs {
-			p := packageInfo{
-				absDir: allDirs[ix],
-			}
-			go func() {
-				defer wg.Done()
-				p.parsePackage()
-			}()
-			allInfo = append(allInfo, &p)
-		}
-		wg.Wait()*/
 		//加载路径获取配置信息
 		cfg := &packages.Config{
 			Mode: packages.LoadSyntax, //不包含依赖,尝试下面这个
@@ -188,7 +141,7 @@ func main() {
 	//为isExist字段赋值
 	{
 		for _, p := range allInfo {
-			if len(p.FuncNames) == 0 {
+			if len(p.Funcs) == 0 {
 				//这个目录下没有满足条件的函数
 				p.isExist = false
 			} else {
@@ -263,7 +216,35 @@ func main() {
 	{
 		//buildCodeUseString(exitFuncInfos)
 		buildCodeFromTemplate(exitFuncInfos)
+		//time.Sleep(3 * 1e9)
 	}
+
+	//错误处理还没做
+	//调用执行callMethod生成序列化的json文件
+	{
+		cmd := exec.Command(getGOROOTBin(), "run", "callMethod.go")
+		//cmd := exec.Command("test.bat")
+		err := cmd.Run()
+		if err != nil {
+			fmt.Printf("Error %v executing command!", err)
+			os.Exit(1)
+		}
+	}
+	//反序列化得到callMethod的结果
+	//var reult = make([]*dot.TypeLives, 0)
+	/*	var f interface{}
+		{
+			buf, err := ioutil.ReadFile("result.json")
+			if err != nil {
+				log.Fatal("读取json出错")
+			}
+			err = json.Unmarshal(buf, &f)
+			if err != nil {
+				log.Fatal("反序列化出错")
+			}
+			fmt.Println(f)
+
+		}*/
 
 }
 
@@ -450,12 +431,18 @@ func (p *packageInfo) findFuncNodeOnAst() {
 				if len(resultList) != 1 {
 					break //排除返回值不值一个的函数
 				}
-				if !returnValueJudgment(resultList[0]) {
-					break //排除返回值是一个但类型不匹配的函数
+				b1, b2 := returnValueJudgment(resultList[0])
+				if !b1 {
+					break //排除返回值类型不匹配的函数
 				}
-				//保存函数名
-				var funcName = funcNode.Name.Name
-				p.FuncNames = append(p.FuncNames, funcName)
+				//保存函数信息
+				funcInfo := &FuncOfDot{
+					FuncName: funcNode.Name.Name, //函数名
+					IsSlice:  b2,
+					location: funcNode.Type.Func,
+				}
+
+				p.Funcs = append(p.Funcs, funcInfo)
 				return true
 			}
 			return true
@@ -463,22 +450,23 @@ func (p *packageInfo) findFuncNodeOnAst() {
 	}
 }
 
-//判断函数的返回值是否符合条件
-func returnValueJudgment(ret *ast.Field) bool {
+//第一个代表函数的返回值是否符合条件
+//第二个代表返回值是否是数组
+func returnValueJudgment(ret *ast.Field) (bool, bool) {
 	retype, ok := (ret.Type).(*ast.StarExpr) //找到*
 	if ok {                                  //是一个指针
 		x, ok1 := (retype.X).(*ast.SelectorExpr) //有选择器的表达式  a.b
 		if !ok1 {
-			return false //类似*xxx
+			return false, false //类似*xxx
 		}
 		xx := x.X.(*ast.Ident)
 		xsel := x.Sel.Name
 		if xx.Name == "dot" {
 			if xsel == "TypeLives" {
-				return true //返回值是*dot.Typelives
+				return true, false //返回值是*dot.Typelives
 			}
 		}
-		return false //指针指向的结构错误
+		return false, false //指针指向的结构错误
 	}
 
 	retype2, ok := (ret.Type).(*ast.ArrayType)
@@ -487,20 +475,20 @@ func returnValueJudgment(ret *ast.Field) bool {
 		if ok { //切片存放的指针数据
 			x, ok1 := (elt.X).(*ast.SelectorExpr) //有选择器的表达式  a.b
 			if !ok1 {
-				return false //类似*xxx
+				return false, false //类似*xxx
 			}
 			xx := x.X.(*ast.Ident)
 			xsel := x.Sel.Name
 			if xx.Name == "dot" {
 				if xsel == "TypeLives" {
-					return true //返回值是*dot.Typelives
+					return true, true //返回值是[]*dot.Typelives
 				}
 			}
-			return false //指针指向的结构错误
+			return false, false //指针指向的结构错误
 		}
-		return false //切片存放的数据不是指针
+		return false, false //切片存放的数据不是指针
 	}
-	return false //返回值类型错误
+	return false, false //返回值类型错误
 }
 
 //
@@ -516,11 +504,24 @@ func getGOPATHsrc() string {
 	}
 	return gopath
 }
+func getGOROOTBin() string {
+	gopath := os.Getenv("GOROOT")
+	switch runtime.GOOS {
+	case "windows":
+		gopath = gopath + "\\bin\\go.exe"
+	case "linux":
+		gopath = gopath + "/bin/"
+	default:
+		log.Fatal("无法识别的操作系统")
+	}
+	return gopath
+}
 
 //模板生成
 func buildCodeFromTemplate(e []*packageInfo) {
 	buf := bytes.Buffer{}
 	//使用模板
+	//fmt.Println(e)
 	t, err := template.ParseFiles("file1.tmpl")
 	if err != nil {
 		log.Println("parseFileErr:", err)
@@ -538,7 +539,7 @@ func buildCodeFromTemplate(e []*packageInfo) {
 	}
 }
 
-//字符串拼接生成
+/*//字符串拼接生成
 func buildCodeUseString(exitFuncInfo []*packageInfo) {
 	buf := bytes.Buffer{}
 	{
@@ -566,14 +567,14 @@ func buildCodeUseString(exitFuncInfo []*packageInfo) {
 		_, _ = fmt.Fprintf(&buf, "}")
 	}
 	//file
-	baseName := "callMethod.go"
+	baseName := "v1.go"
 	baseName = filepath.Join(".", baseName)
 	err := ioutil.WriteFile(baseName, buf.Bytes(), 0644)
 	if err != nil {
 		log.Fatalf("writing output: %s", err)
 	}
 }
-
+*/
 //解析子目录，为对象添加packagename以及ast.file信息
 //nil
 func (p *packageInfo) parsePackage() {
