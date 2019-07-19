@@ -26,15 +26,19 @@ import (
 var path = flag.String("path", "", "find Absolute path,must be set")
 var mod = flag.Bool("mod", true, "Traverse mod, default true")
 
+//保存返回的组件通用信息
 type packageInfo struct {
 	absDir      string //该目录\包的绝对路径
 	packageName string //正在扫描的包名，需要绝对路径
 	astFiles    []*ast.File
 	ImportDir   string //导入路径
-	//FuncNames []string //满足条件的函数名
-	Funcs   []*FuncOfDot
-	isExist bool   //是否存在满足条件的函数
-	Alias   string //别名
+	Alias       string //别名
+
+	Funcs   []*FuncOfDot //返回组件普通信息的函数
+	isExist bool         //是否存在返回dot.TypeLives的函数
+
+	ConfigFuncNames []string //返回组件特有配置信息的函数
+	IsExistConfig   bool     //是否存在返回config的函数
 }
 type FuncOfDot struct {
 	FuncName string    //函数名
@@ -83,7 +87,7 @@ func main() {
 		break
 	}
 
-	//保存目录以及子目录的绝对路径
+	//保存目录以及子目录
 	var allDirs []string
 	{
 		//获取所有的子目录
@@ -134,53 +138,43 @@ func main() {
 	//查找[]*packageInfo的每一个对象，根据ast,node判断
 	{
 		for _, p := range allInfo {
-			p.findFuncNodeOnAst()
+			p.findFuncNodeOnAst(false) //查找*dot.TypeLives和[]*dot.TypeLives
+			p.findFuncNodeOnAst(true)  //查找*dot.ConfigTypeLives
 		}
 	}
 
-	//为isExist字段赋值
-	{
-		for _, p := range allInfo {
-			if len(p.Funcs) == 0 {
-				//这个目录下没有满足条件的函数
-				p.isExist = false
-			} else {
-				p.isExist = true
-			}
-		}
-	}
-
-	//将满足条件的包筛选出来
+	//将满足普通条件的包筛选出来
 	var exitFuncInfos []*packageInfo
 	{
-		for _, p := range allInfo {
-			if p.isExist {
-				exitFuncInfos = append(exitFuncInfos, p)
+		//为isExist字段赋值
+		{
+			for _, p := range allInfo {
+				if len(p.Funcs) == 0 {
+					//这个目录下没有满足条件的函数
+					p.isExist = false
+				} else {
+					p.isExist = true
+				}
+			}
+		}
+		//赋值
+		{
+			for _, p := range allInfo {
+				if p.isExist {
+					exitFuncInfos = append(exitFuncInfos, p)
+				}
+			}
+		}
+
+		//检测有没有结果
+		{
+			if len(exitFuncInfos) == 0 {
+				log.Fatal("没有找到符合条件的函数")
 			}
 		}
 	}
 
-	//检测有没有结果
-	{
-		if len(exitFuncInfos) == 0 {
-			log.Fatal("没有找到符合条件的函数")
-		}
-	}
-
-	//生成导入路径
-	{
-		/*for _, p := range exitFuncInfos {
-			for {
-				gopath := getGOPATHsrc()
-				p.ImportDir = p.absDir[len(gopath):]
-				//将路径分隔符变为/
-				p.ImportDir = filepath.ToSlash(p.ImportDir)
-				break
-			}
-		}*/
-	}
-
-	//怎么解决同名包问题-别名
+	//解决同名包问题-别名
 	{
 		//存储每个包出现的次数
 		map1 := make(map[string]int)
@@ -212,11 +206,23 @@ func main() {
 		}
 	}
 
+	//为isExistConfig字段赋值
+	{
+		for _, p := range exitFuncInfos {
+			if len(p.ConfigFuncNames) == 0 {
+				//这个目录下没有满足条件的函数
+				p.IsExistConfig = false
+			} else {
+				p.IsExistConfig = true
+			}
+
+		}
+	}
+
 	//生成代码文件
 	{
-		//buildCodeUseString(exitFuncInfos)
 		buildCodeFromTemplate(exitFuncInfos)
-		//time.Sleep(3 * 1e9)
+
 	}
 
 	//错误处理还没做
@@ -234,7 +240,7 @@ func main() {
 	//var reult = make([]*dot.TypeLives, 0)
 	/*	var f interface{}
 		{
-			buf, err := ioutil.ReadFile("result.json")
+			buf, err := ioutil.ReadFile("resultConfig.json")
 			if err != nil {
 				log.Fatal("读取json出错")
 			}
@@ -273,7 +279,7 @@ func isDir(paths []string) bool {
 func isDirectory(name string) bool {
 	info, err := os.Stat(name) //return fileinfo
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("isDirectory:", err)
 	}
 	return info.IsDir() //true or false
 }
@@ -404,7 +410,7 @@ func getAllSonDirs(dirpath string) ([]string, error) {
 }
 
 //查找满足条件的函数节点
-func (p *packageInfo) findFuncNodeOnAst() {
+func (p *packageInfo) findFuncNodeOnAst(isConfig bool) {
 	///var FuncNames []string
 	for _, astFile := range p.astFiles {
 		if astFile == nil {
@@ -431,18 +437,26 @@ func (p *packageInfo) findFuncNodeOnAst() {
 				if len(resultList) != 1 {
 					break //排除返回值不值一个的函数
 				}
-				b1, b2 := returnValueJudgment(resultList[0])
-				if !b1 {
-					break //排除返回值类型不匹配的函数
+				if isConfig {
+					b1, _ := returnValueJudgmentOfConfig(resultList[0])
+					if !b1 {
+						break //排除返回值类型不匹配的函数
+					}
+					//保存函数信息
+					p.ConfigFuncNames = append(p.ConfigFuncNames, funcNode.Name.Name)
+				} else {
+					b1, b2 := returnValueJudgment(resultList[0])
+					if !b1 {
+						break //排除返回值类型不匹配的函数
+					}
+					//保存函数信息
+					funcInfo := &FuncOfDot{
+						FuncName: funcNode.Name.Name, //函数名
+						IsSlice:  b2,
+						location: funcNode.Type.Func,
+					}
+					p.Funcs = append(p.Funcs, funcInfo)
 				}
-				//保存函数信息
-				funcInfo := &FuncOfDot{
-					FuncName: funcNode.Name.Name, //函数名
-					IsSlice:  b2,
-					location: funcNode.Type.Func,
-				}
-
-				p.Funcs = append(p.Funcs, funcInfo)
 				return true
 			}
 			return true
@@ -450,6 +464,7 @@ func (p *packageInfo) findFuncNodeOnAst() {
 	}
 }
 
+//查找通用组件信息
 //第一个代表函数的返回值是否符合条件
 //第二个代表返回值是否是数组
 func returnValueJudgment(ret *ast.Field) (bool, bool) {
@@ -487,6 +502,28 @@ func returnValueJudgment(ret *ast.Field) (bool, bool) {
 			return false, false //指针指向的结构错误
 		}
 		return false, false //切片存放的数据不是指针
+	}
+	return false, false //返回值类型错误
+}
+
+//查找特有组件信息
+//第一个代表函数的返回值是否符合条件
+//第二个代表返回值是否是数组
+func returnValueJudgmentOfConfig(ret *ast.Field) (bool, bool) {
+	retype, ok := (ret.Type).(*ast.StarExpr) //找到*
+	if ok {                                  //是一个指针
+		x, ok1 := (retype.X).(*ast.SelectorExpr) //有选择器的表达式  a.b
+		if !ok1 {
+			return false, false //类似*xxx
+		}
+		xx := x.X.(*ast.Ident)
+		xsel := x.Sel.Name
+		if xx.Name == "dot" {
+			if xsel == "ConfigTypeLives" {
+				return true, false //返回值是*dot.ConfigTypelives
+			}
+		}
+		return false, false //指针指向的结构错误
 	}
 	return false, false //返回值类型错误
 }

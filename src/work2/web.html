@@ -1,0 +1,72 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- when using the mode "code", it's important to specify charset utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <link href="jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="jsoneditor/dist/jsoneditor.min.js"></script>
+    <script src="jsoneditor/jquery-3.3.1.min.js"></script>
+    <script src="jsoneditor/FileSaver.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="codeEdit" style="width: 700px; height: 700px;float: left"></div>
+<div id="covert" style="width: 200px; height: 700px;float: left">
+    <button id="codeToTree" onclick="codeToTree()" style="width: 200px;margin-top: 100px" >
+        ->
+    </button>
+    <button id="treeToCode" onclick="treeToCode()" style=" width: 200px;margin-top: 300px">
+        <-
+    </button>
+</div>
+<div id="treeEdit" style="width: 700px; height: 700px;float: left"></div>
+<button onclick="getJSON();" style="width: 351px;height: 100px;color: #010101;font-size: x-large">Generate JSON Of Config</button>
+<p>
+    推荐在右侧树形编辑框中修改，不容易发生格式错误，单个组件增加实例时请在代码编辑框中复制粘贴<br/>
+    配置生成以左侧代码框为最终结果，如在树型编辑框进行了更改请点击<-按钮将配置更新到左侧
+</p>
+<script>
+    // create the editor
+    var codeEdit = document.getElementById("codeEdit");
+    var options = { mode:'code'};
+    var code = new JSONEditor(codeEdit, options);
+    var treeEdit = document.getElementById("treeEdit");
+    var options1 = { mode:'tree'};
+    var tree = new JSONEditor(treeEdit, options1);
+    $.ajax({
+        type:'get',
+        url:'resultConfig.json',
+        dataType:'json',
+        success:function(data){
+            code.set(data);
+            tree.set(data);
+        }
+    });
+
+    // get json of config from user
+    function getJSON() {
+        //json = editor.get();
+        var data = code.get();
+        //alert(JSON.stringify(json, null, 2));
+        var r = confirm(JSON.stringify(data, null, 2));
+        if (r===true){
+            var content = JSON.stringify(data);
+            var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, "webGenerateConfig.json");
+        }
+
+    }
+    function codeToTree() {
+        var conn=code.get();
+        tree.set(conn)
+    }
+    function treeToCode() {
+        var conn=tree.get();
+        code.set(conn)
+    }
+
+</script>
+</body>
+</html>
